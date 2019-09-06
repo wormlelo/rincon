@@ -18,7 +18,7 @@
                 <hr>
                 <div class="card-body">
                     @foreach($messages as $message)  
-                    <h5>{{ $message->user->name }}</h5>
+                    <h5><a href="/u/{{ $message->user->id }}">{{ $message->user->name }}</a></h5>
                     {{$message->body}}
                     <br>
                 <!--    <small>{{ $message->created_at->format('d/m/Y') }}</small> -->

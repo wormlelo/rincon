@@ -32,6 +32,10 @@ class User extends Authenticatable
         return $this->hasMany('App\Message');
     }
 
+    function following() {
+        return $this->belongsToMany('App\User', 'followers', 'user_id', 'following_id');
+    }
+
     /**
      * The attributes that should be cast to native types.
      *

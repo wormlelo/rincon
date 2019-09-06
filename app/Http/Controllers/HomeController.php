@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\messages;
-use Auth;
+use Illuminate\Support\Facades\Auth;
+use App\message;
 
 
 class HomeController extends Controller
@@ -26,10 +26,16 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
    public function index()
-   {        
-       $messages = Auth::user()->messages;
- // dd is dump and die
+     {        
+ // an array of all users that are being followed
+        $following = Auth::user()->following->pluck('id');
+
+        $messages = Message::whereIn('user_id', $following)->get();
+
+       //      dd is dump and die
        //      dd($messages);
+       //      dd(Auth::user()->following);
+       
 
         return view('home', [
             'messages' => $messages
